@@ -45,11 +45,9 @@ class GuideSceneState extends State<GuideScene> {
     await SpUtil.getInstance();
     if (SpUtil.getBool(Constant.key_guide, defValue: true) &&
         ObjectUtil.isNotEmpty(guideList)) {
-      print('key_guide');
       SpUtil.putBool(Constant.key_guide, false);
       _initBannerData();
     } else {
-      print('splash');
       _initSplash();
     }
   }
@@ -65,8 +63,7 @@ class GuideSceneState extends State<GuideScene> {
         _count = _tick.toInt();
       });
       if (_count == 0) {
-        _timer.cancel();
-        // _goMain();
+        _goMain();
       }
     });
     _timer.startCountDown();
@@ -162,7 +159,10 @@ class GuideSceneState extends State<GuideScene> {
           onTap: () {
             if (ObjectUtil.isEmpty(_splashModel)) return;
             _goMain();
-            NavigatorUtil.pushWeb(context);
+            NavigatorUtil.pushWeb(context,
+                url:
+                    'https://github.com/ZTXBEST',
+                title: 'Github');
           },
           child: new Stack(
             children: <Widget>[
@@ -209,7 +209,6 @@ class GuideSceneState extends State<GuideScene> {
 
   @override
   Widget build(BuildContext context) {
-    print(status);
     return new Material(
       child: new Stack(
         children: <Widget>[

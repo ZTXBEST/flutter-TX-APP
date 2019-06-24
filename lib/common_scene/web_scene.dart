@@ -15,45 +15,46 @@ class WebScene extends StatefulWidget {
 }
 
 class _WebSceneState extends State<WebScene> {
-
-  bool loading = true;
+  bool isDataReady = false;
   PageState pageState = PageState.Loading;
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     fetchData();
   }
 
-  Future fetchData() async{
-    await Future.delayed(Duration(milliseconds: 2000),() {
+  Future<void> fetchData() async {
+    await Future.delayed(Duration(milliseconds: 2000), () {
       pageState = PageState.Success;
     });
+
     setState(() {
-      loading = false;
+      isDataReady = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
-    if (loading) {
-      return LoadingIndicator(pageState);
+    if (!isDataReady) {
+      return LoadingIndicator(
+        pageState,
+      );
     }
 
     return WebviewScaffold(
-       url: this.widget.url,
-       appBar: AppBar(
-         title: Text(this.widget.title ?? '腾讯动漫'),
-         actions: <Widget>[
-           GestureDetector(
+      url: this.widget.url,
+      appBar: AppBar(
+        title: Text(this.widget.title ?? '腾讯动漫'),
+        actions: <Widget>[
+          GestureDetector(
             onTap: () {
-              Share.share('https://github.com');
+              Share.share('https://github.com/ZDfordream/FlutterTianYue');
             },
             child: Image.asset('img/icon_menu_share.png'),
           ),
-         ],
-       ),
+        ],
+      ),
     );
   }
 }
