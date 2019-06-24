@@ -8,6 +8,9 @@ export 'package:TXApp/utils/tx_color.dart';
 export 'package:TXApp/common.dart';
 export 'package:TXApp/utils/navigator_util.dart';
 
+// request
+export 'package:TXApp/request/request.dart';
+
 // third
 export 'package:flustars/flustars.dart';
 export 'package:common_utils/common_utils.dart';
